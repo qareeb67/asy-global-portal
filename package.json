@@ -1,0 +1,12 @@
+{
+  "name": "asy-global-portal-v1",
+  "private": true,
+  "scripts": {
+    "dev": "node dev.mjs",
+    "install:all": "npm --prefix server install && npm --prefix client install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "version": "1.5.4"
+}
