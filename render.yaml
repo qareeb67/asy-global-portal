@@ -17,9 +17,7 @@ services:
           type: web
           envVarKey: RENDER_EXTERNAL_URL
       - key: DATABASE_URL
-        fromDatabase:
-          name: asy-global-db
-          property: connectionString
+        sync: false
       - key: JWT_SECRET
         generateValue: true
       - key: JWT_EXPIRES_IN
@@ -44,9 +42,3 @@ services:
         source: /*
         destination: /index.html
 
-databases:
-  - name: asy-global-db
-    databaseName: asy_global
-    user: asy_global_user
-    plan: free
-    region: frankfurt

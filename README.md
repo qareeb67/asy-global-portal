@@ -25,7 +25,7 @@ This repository includes `render.yaml` for a two-service Render deployment plus 
 
 - `asy-global-api` — Node/Express API
 - `asy-global-portal` — Vite/React static site
-- `asy-global-db` — PostgreSQL
+- PostgreSQL — use the existing Render Postgres instance; create a separate logical database named `asy_global`
 
 The API is configured for Render's `PORT` and binds to `0.0.0.0`. The production auth cookie uses `SameSite=None; Secure` so the React static site can authenticate to the separate API origin.
 
@@ -36,7 +36,7 @@ Render Free is suitable for a demo/preview, not for real client records. Free we
 ### First deployment
 
 1. Push this repository to GitHub.
-2. In Render, create a **New Blueprint** from the repository and approve the resources from `render.yaml`.
+2. In Render, create a **New Blueprint** from the repository. When prompted for `DATABASE_URL`, supply the connection string for the separate `asy_global` database inside your existing Render Postgres instance.
 3. After deployment, verify `https://asy-global-api.onrender.com/api/health`.
 4. Verify the frontend at `https://asy-global-portal.onrender.com`.
 5. The Blueprint wires the deployed API and frontend URLs automatically; Vite receives the API URL at build time.
@@ -48,3 +48,14 @@ Render Free is suitable for a demo/preview, not for real client records. Free we
 Set `CLIENT_URL` on the API to the exact deployed frontend origin. Keep `JWT_SECRET` in Render Environment Variables/Secrets; never commit it.
 
 For React Router, the static site rewrite `/* -> /index.html` is already included in the Blueprint.
+
+
+## Using an existing Render Postgres instance
+
+Render allows more than one logical database inside a single Postgres instance. Do not create a second Free Postgres instance if your workspace already has one. In the existing Postgres instance, open the provided PSQL command/session and run:
+
+```sql
+CREATE DATABASE asy_global;
+```
+
+Then obtain the connection URL for that database and provide it to the `DATABASE_URL` environment variable for `asy-global-api` during the initial Blueprint setup. Do not use the Ghost HMS database itself; ASY must use the separate `asy_global` database.
