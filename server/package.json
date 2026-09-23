@@ -1,6 +1,6 @@
 {
   "name": "asy-global-portal-server",
-  "version": "1.5.4",
+  "version": "1.5.7",
   "type": "module",
   "scripts": {
     "dev": "node --watch src/server.js",

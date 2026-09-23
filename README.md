@@ -59,3 +59,8 @@ CREATE DATABASE asy_global;
 ```
 
 Then obtain the connection URL for that database and provide it to the `DATABASE_URL` environment variable for `asy-global-api` during the initial Blueprint setup. Do not use the Ghost HMS database itself; ASY must use the separate `asy_global` database.
+
+
+## V1.5.7 deployment fix
+
+The frontend now reads `VITE_API_URL` directly at Vite build time and appends `/api` only when needed. The Render build no longer uses shell interpolation to generate a JavaScript file, avoiding `bad substitution` on Render's Linux shell.

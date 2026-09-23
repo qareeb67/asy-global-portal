@@ -29,9 +29,11 @@ services:
     name: asy-global-portal
     runtime: static
     rootDir: client
-    buildCommand: npm install && node -e "const fs=require('fs'); const u=process.env.VITE_API_URL; if(!u) throw new Error('VITE_API_URL missing'); fs.writeFileSync('src/generated-api-url.js', `export default ${JSON.stringify(u.replace(/\/$/, '') + '/api')};\n`)" && npm run build
+    buildCommand: npm install --include=dev && npm run build
     staticPublishPath: dist
     envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: 'true'
       - key: VITE_API_URL
         fromService:
           name: asy-global-api
