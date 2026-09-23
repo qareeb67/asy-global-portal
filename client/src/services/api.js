@@ -1,22 +1,22 @@
 import axios from 'axios';
 
-// Production fallback keeps the deployed frontend connected even if
-// VITE_API_URL was missed in Render.
-const productionFallback = 'https://asy-global-portal-sav2.onrender.com';
+const LOCAL_API_ORIGIN = 'http://localhost:5000';
+const LIVE_API_ORIGIN = 'https://asy-global-portal-sav2.onrender.com';
 
-const configuredBaseUrl =
-  (import.meta.env.VITE_API_URL || productionFallback).trim();
+const apiOrigin = import.meta.env.PROD
+  ? LIVE_API_ORIGIN
+  : (import.meta.env.VITE_API_URL || LOCAL_API_ORIGIN);
 
-const normalizedBaseUrl = configuredBaseUrl.replace(/\/+$/, '');
+const normalizedOrigin = apiOrigin.replace(/\/+$/, '');
 
-const apiBaseUrl = normalizedBaseUrl.endsWith('/api')
-  ? normalizedBaseUrl
-  : `${normalizedBaseUrl}/api`;
+const baseURL = normalizedOrigin.endsWith('/api')
+  ? normalizedOrigin
+  : `${normalizedOrigin}/api`;
 
 export const api = axios.create({
-  baseURL: apiBaseUrl,
+  baseURL,
   withCredentials: true,
   timeout: 20000
 });
 
-export { apiBaseUrl };
+export { baseURL };

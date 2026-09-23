@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { api } from './services/api';
+
 import Login from './pages/Login.jsx';
 import Layout from './components/Layout.jsx';
 import Dashboard from './pages/Dashboard.jsx';
@@ -21,10 +22,15 @@ export default function App() {
 
   useEffect(() => {
     api.get('/auth/me')
-      .then(({ data }) => setUser(data.user))
-      .catch(() => setUser(null));
+      .then(({ data }) => {
+        if (data?.user) {
+          setUser(data.user);
+        }
+      })
+      .catch(() => {
+        setUser(null);
+      });
   }, []);
-
 
   if (!user) {
     return (
@@ -38,7 +44,15 @@ export default function App() {
   return (
     <Routes>
       <Route path="/payments/:id/print" element={<ReceiptPrint />} />
-      <Route element={<Layout user={user} onLogout={() => setUser(null)} />}>
+
+      <Route
+        element={
+          <Layout
+            user={user}
+            onLogout={() => setUser(null)}
+          />
+        }
+      >
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/clients" element={<Clients />} />
@@ -48,10 +62,19 @@ export default function App() {
         <Route path="/opportunities" element={<Opportunities />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/testimonials" element={<Testimonials />} />
-        <Route path="/profile" element={<Profile user={user} onUserUpdated={setUser} />} />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              user={user}
+              onUserUpdated={setUser}
+            />
+          }
+        />
         <Route path="/users" element={<Users user={user} />} />
         <Route path="/activity" element={<Activity />} />
       </Route>
+
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );

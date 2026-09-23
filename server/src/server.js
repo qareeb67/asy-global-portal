@@ -33,32 +33,27 @@ const host = process.env.HOST || '0.0.0.0';
 
 app.set('trust proxy', 1);
 
-const normalizeOrigin = (value) =>
-  String(value || '').trim().replace(/\/+$/, '');
-
 const configuredOrigins = (process.env.CLIENT_URL || '')
   .split(',')
-  .map(normalizeOrigin)
+  .map((value) => value.trim().replace(/\/+$/, ''))
   .filter(Boolean);
 
 function isAllowedOrigin(origin) {
   if (!origin) return true;
 
-  const normalized = normalizeOrigin(origin);
+  const normalized = origin.replace(/\/+$/, '');
 
   if (configuredOrigins.includes(normalized)) {
     return true;
   }
 
-  // Production fallback for the ASY Render frontend.
   try {
     const url = new URL(normalized);
 
     return (
       url.protocol === 'https:' &&
-      /^asy-global-portal-[a-z0-9-]+\.onrender\.com$/i.test(
-        url.hostname
-      )
+      url.hostname.endsWith('.onrender.com') &&
+      url.hostname.startsWith('asy-global-portal')
     );
   } catch {
     return false;
@@ -73,15 +68,13 @@ app.use(
 
 app.use(
   cors({
-    origin: (origin, callback) => {
+    origin(origin, callback) {
       if (isAllowedOrigin(origin)) {
         return callback(null, true);
       }
 
       console.warn(`CORS blocked origin: ${origin}`);
-      return callback(
-        new Error(`CORS blocked origin: ${origin}`)
-      );
+      return callback(new Error(`CORS blocked origin: ${origin}`));
     },
     credentials: true
   })
