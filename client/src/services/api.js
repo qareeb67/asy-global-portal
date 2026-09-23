@@ -1,17 +1,11 @@
 import axios from 'axios';
 
-const productionApi =
-  'https://asy-global-portal-sav2.onrender.com';
+const productionApi = 'https://asy-global-portal-sav2.onrender.com';
+const configuredBaseUrl = import.meta.env.PROD
+  ? productionApi
+  : (import.meta.env.VITE_API_URL || 'http://localhost:5000');
 
-const configuredBaseUrl =
-  import.meta.env.PROD
-    ? productionApi
-    : (import.meta.env.VITE_API_URL || 'http://localhost:5000');
-
-const normalizedBaseUrl = configuredBaseUrl
-  .trim()
-  .replace(/\/+$/, '');
-
+const normalizedBaseUrl = configuredBaseUrl.trim().replace(/\/+$/, '');
 const baseURL = normalizedBaseUrl.endsWith('/api')
   ? normalizedBaseUrl
   : `${normalizedBaseUrl}/api`;
@@ -22,16 +16,23 @@ export const api = axios.create({
   withCredentials: true
 });
 
-// Send the login token with every protected request.
 api.interceptors.request.use((config) => {
   const token = sessionStorage.getItem('asy_access_token');
-
   if (token) {
     config.headers = config.headers || {};
     config.headers.Authorization = `Bearer ${token}`;
   }
-
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401 && !error.config?.url?.includes('/auth/login')) {
+      sessionStorage.removeItem('asy_access_token');
+    }
+    return Promise.reject(error);
+  }
+);
 
 export { baseURL };

@@ -1,23 +1,16 @@
 import jwt from 'jsonwebtoken';
 import { query } from '../db.js';
 
-function getAccessToken(req) {
-  const authHeader = req.get('authorization');
-
-  if (authHeader?.startsWith('Bearer ')) {
-    return authHeader.slice(7).trim();
-  }
-
-  return req.cookies?.asy_access || null;
+function getBearerToken(req) {
+  const header = req.headers.authorization || '';
+  if (!header.toLowerCase().startsWith('bearer ')) return null;
+  return header.slice(7).trim() || null;
 }
 
 export async function requireAuth(req, res, next) {
   try {
-    const token = getAccessToken(req);
-
-    if (!token) {
-      return res.status(401).json({ message: 'Authentication required.' });
-    }
+    const token = getBearerToken(req) || req.cookies?.asy_access;
+    if (!token) return res.status(401).json({ message: 'Authentication required.' });
 
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     const result = await query(

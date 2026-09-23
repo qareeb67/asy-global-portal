@@ -26,6 +26,7 @@ export default function App() {
   }, []);
 
   if (user === undefined) return <div className="app-loading">Loading ASY Portal…</div>;
+
   if (!user) {
     return (
       <Routes>
@@ -38,7 +39,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/payments/:id/print" element={<ReceiptPrint />} />
-      <Route element={<Layout user={user} onLogout={() => { sessionStorage.removeItem('asy_access_token'); setUser(null); }} />}>
+      <Route element={<Layout user={user} onLogout={() => setUser(null)} />}>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/clients" element={<Clients />} />
