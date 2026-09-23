@@ -17,7 +17,7 @@ import Notifications from './pages/Notifications.jsx';
 import Testimonials from './pages/Testimonials.jsx';
 
 export default function App() {
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     api.get('/auth/me')
@@ -25,7 +25,7 @@ export default function App() {
       .catch(() => setUser(null));
   }, []);
 
-  if (user === undefined) return <div className="app-loading">Loading ASY Portal…</div>;
+
   if (!user) {
     return (
       <Routes>
