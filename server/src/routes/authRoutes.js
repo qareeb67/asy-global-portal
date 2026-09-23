@@ -38,6 +38,7 @@ router.post('/login', async (req, res) => {
     await logActivity({ userId: user.id, action: 'USER_LOGIN', entityType: 'user', entityId: String(user.id) });
 
     res.json({
+      token,
       user: { id: user.id, full_name: user.full_name, email: user.email, role: user.role }
     });
   } catch (error) {

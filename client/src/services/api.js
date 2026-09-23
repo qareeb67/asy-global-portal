@@ -1,22 +1,25 @@
 import axios from 'axios';
 
-const LOCAL_API_ORIGIN = 'http://localhost:5000';
-const LIVE_API_ORIGIN = 'https://asy-global-portal-sav2.onrender.com';
-
-const apiOrigin = import.meta.env.PROD
-  ? LIVE_API_ORIGIN
-  : (import.meta.env.VITE_API_URL || LOCAL_API_ORIGIN);
-
-const normalizedOrigin = apiOrigin.replace(/\/+$/, '');
-
-const baseURL = normalizedOrigin.endsWith('/api')
-  ? normalizedOrigin
-  : `${normalizedOrigin}/api`;
+const configuredBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const normalizedBaseUrl = configuredBaseUrl.replace(/\/+$/, '');
+const apiBaseUrl = normalizedBaseUrl.endsWith('/api')
+  ? normalizedBaseUrl
+  : `${normalizedBaseUrl}/api`;
 
 export const api = axios.create({
-  baseURL,
-  withCredentials: true,
+  baseURL: apiBaseUrl,
   timeout: 20000
 });
 
-export { baseURL };
+api.interceptors.request.use((config) => {
+  const token = sessionStorage.getItem('asy_access_token');
+
+  if (token) {
+    config.headers = config.headers || {};
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
+export { apiBaseUrl };
