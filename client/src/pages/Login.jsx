@@ -15,16 +15,27 @@ export default function Login({ onLogin }) {
     setLoading(true);
 
     try {
-      const { data } = await api.post('/auth/login', { email, password });
+      const { data } = await api.post('/auth/login', {
+        email: email.trim(),
+        password
+      });
 
-      if (!data?.token || !data?.user) {
+      if (!data?.user || !data?.token) {
         throw new Error('Login response was incomplete.');
       }
 
-      sessionStorage.setItem('asy_access_token', data.token);
+      sessionStorage.setItem(
+        'asy_access_token',
+        data.token
+      );
+
       onLogin(data.user);
     } catch (err) {
-      setError(err.response?.data?.message || err.message || 'Unable to sign in.');
+      setError(
+        err.response?.data?.message ||
+        err.message ||
+        'Unable to sign in.'
+      );
     } finally {
       setLoading(false);
     }
