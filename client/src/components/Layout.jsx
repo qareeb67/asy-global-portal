@@ -46,7 +46,7 @@ export default function Layout({ user, onLogout }) {
           <NavLink to="/notifications"><Bell size={18} /><span>Notifications</span>{unreadCount > 0 && <b className="sidebar-notification-badge">{unreadCount > 99 ? '99+' : unreadCount}</b>}</NavLink>
           <NavLink to="/users"><BriefcaseBusiness size={18} /><span>Staff &amp; Users</span></NavLink>
           <NavLink to="/activity"><Activity size={18} /><span>Activity Log</span></NavLink>
-          <NavLink to="/account-settings"><Settings2 size={18} /><span>Account Settings</span></NavLink>
+          <NavLink to="/profile"><Settings2 size={18} /><span>Account Settings</span></NavLink>
         </nav>
 
         <div className="sidebar-footer">

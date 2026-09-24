@@ -1,15 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { query } from '../db.js';
 
-function getBearerToken(req) {
-  const header = req.headers.authorization || '';
-  if (!header.toLowerCase().startsWith('bearer ')) return null;
-  return header.slice(7).trim() || null;
-}
-
 export async function requireAuth(req, res, next) {
   try {
-    const token = getBearerToken(req) || req.cookies?.asy_access;
+    const token = req.cookies?.asy_access;
     if (!token) return res.status(401).json({ message: 'Authentication required.' });
 
     const payload = jwt.verify(token, process.env.JWT_SECRET);
@@ -19,9 +13,7 @@ export async function requireAuth(req, res, next) {
     );
 
     const user = result.rows[0];
-    if (!user || !user.is_active) {
-      return res.status(401).json({ message: 'Account unavailable.' });
-    }
+    if (!user || !user.is_active) return res.status(401).json({ message: 'Account unavailable.' });
 
     req.user = user;
     next();

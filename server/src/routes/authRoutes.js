@@ -17,72 +17,37 @@ const accessCookieOptions = {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body ?? {};
-
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required.' });
-    }
+    if (!email || !password) return res.status(400).json({ message: 'Email and password are required.' });
 
     const result = await query(
       'SELECT id, full_name, email, password_hash, role, is_active FROM users WHERE LOWER(email) = LOWER($1)',
       [email.trim()]
     );
-
     const user = result.rows[0];
 
     if (!user || !user.is_active || !(await bcrypt.compare(password, user.password_hash))) {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
 
-    if (!process.env.JWT_SECRET) {
-      return res.status(500).json({ message: 'Server authentication is not configured.' });
-    }
-
-    const token = jwt.sign(
-      { sub: user.id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES_IN || '8h' }
-    );
+    const token = jwt.sign({ sub: user.id, role: user.role }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN || '8h'
+    });
 
     res.cookie('asy_access', token, accessCookieOptions);
 
-    try {
-      await logActivity({
-        userId: user.id,
-        action: 'USER_LOGIN',
-        entityType: 'user',
-        entityId: String(user.id)
-      });
-    } catch (activityError) {
-      console.error('Login activity log failed:', activityError);
-    }
+    await logActivity({ userId: user.id, action: 'USER_LOGIN', entityType: 'user', entityId: String(user.id) });
 
     res.json({
-      token,
-      user: {
-        id: user.id,
-        full_name: user.full_name,
-        email: user.email,
-        role: user.role
-      }
+      user: { id: user.id, full_name: user.full_name, email: user.email, role: user.role }
     });
   } catch (error) {
-    console.error('Login failed:', error);
+    console.error(error);
     res.status(500).json({ message: 'Login failed.' });
   }
 });
 
 router.post('/logout', requireAuth, async (req, res) => {
-  try {
-    await logActivity({
-      userId: req.user.id,
-      action: 'USER_LOGOUT',
-      entityType: 'user',
-      entityId: String(req.user.id)
-    });
-  } catch (error) {
-    console.error('Logout activity log failed:', error);
-  }
-
+  await logActivity({ userId: req.user.id, action: 'USER_LOGOUT', entityType: 'user', entityId: String(req.user.id) });
   res.clearCookie('asy_access', accessCookieOptions);
   res.json({ message: 'Logged out.' });
 });

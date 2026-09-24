@@ -14,7 +14,7 @@ const schema = fs.readFileSync(schemaPath, 'utf8');
 await pool.query(schema);
 
 const email = 'admin@asyglobal.com';
-const password =  'ASYTemp2026!';
+const password = 'ChangeMe123!';
 const hash = await bcrypt.hash(password, 12);
 
 const result = await query(

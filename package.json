@@ -8,5 +8,5 @@
   "devDependencies": {
     "concurrently": "^9.1.2"
   },
-  "version": "1.5.7"
+  "version": "1.5.9"
 }
