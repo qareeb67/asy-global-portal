@@ -10,9 +10,15 @@ dotenv.config({ path: path.join(serverDir, '.env') });
 const { Pool } = pg;
 
 if (!process.env.DATABASE_URL) {
-  throw new Error(`DATABASE_URL is missing. Expected it in ${path.join(serverDir, '.env')}`);
-}
+  console.error("RENDER:", process.env.RENDER);
+  console.error("SERVICE:", process.env.RENDER_SERVICE_NAME);
+  console.error(
+    "DATABASE_URL PRESENT:",
+    Boolean(process.env.DATABASE_URL)
+  );
 
+  throw new Error("DATABASE_URL is missing at runtime.");
+}
 export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 export async function query(text, params) {
