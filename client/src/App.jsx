@@ -26,7 +26,6 @@ export default function App() {
   }, []);
 
   if (user === undefined) return <div className="app-loading">Loading ASY Portal…</div>;
-
   if (!user) {
     return (
       <Routes>
@@ -50,6 +49,7 @@ export default function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/profile" element={<Profile user={user} onUserUpdated={setUser} />} />
+        <Route path="/account-settings" element={<Profile user={user} onUserUpdated={setUser} />} />
         <Route path="/users" element={<Users user={user} />} />
         <Route path="/activity" element={<Activity />} />
       </Route>

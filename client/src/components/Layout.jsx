@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { Activity, Bell, BriefcaseBusiness, FileText, FolderLock, LayoutDashboard, LogOut, UsersRound, WalletCards, Plane, UserRound, HeartHandshake, Globe2 } from 'lucide-react';
+import { Activity, Bell, BriefcaseBusiness, FileText, FolderLock, LayoutDashboard, LogOut, UsersRound, WalletCards, Plane, UserRound, HeartHandshake, Globe2, Settings2 } from 'lucide-react';
 import { api } from '../services/api';
 import BrandLogo from './BrandLogo.jsx';
 
@@ -32,7 +32,7 @@ export default function Layout({ user, onLogout }) {
 
         <div className="partnership-card">
           <div className="partnership-icon"><Plane size={15} /></div>
-          <div><span>JOINT TRAVEL DESK</span><strong>ASY × Hajja Zainab</strong></div>
+          <div><span>JOINT TRAVEL PARTNERSHIP</span><strong>ASY &amp; HAJJA ZAINAB</strong></div>
         </div>
 
         <div className="sidebar-section">OPERATIONS</div>
@@ -46,6 +46,7 @@ export default function Layout({ user, onLogout }) {
           <NavLink to="/notifications"><Bell size={18} /><span>Notifications</span>{unreadCount > 0 && <b className="sidebar-notification-badge">{unreadCount > 99 ? '99+' : unreadCount}</b>}</NavLink>
           <NavLink to="/users"><BriefcaseBusiness size={18} /><span>Staff &amp; Users</span></NavLink>
           <NavLink to="/activity"><Activity size={18} /><span>Activity Log</span></NavLink>
+          <NavLink to="/account-settings"><Settings2 size={18} /><span>Account Settings</span></NavLink>
         </nav>
 
         <div className="sidebar-footer">
@@ -61,9 +62,9 @@ export default function Layout({ user, onLogout }) {
         <header className="topbar">
           <div>
             <div className="eyebrow">PRIVATE OPERATIONS PORTAL</div>
-            <h1>ASY Global Travel &amp; Mobility</h1>
+            <h1>ASY &amp; HAJJA ZAINAB GLOBAL TOURS AND MOBILITY</h1>
           </div>
-          <div className="topbar-actions"><Link to="/notifications" className="notification-bell" title="Notifications"><Bell size={18}/>{unreadCount > 0 && <span>{unreadCount > 99 ? '99+' : unreadCount}</span>}</Link><div className="secure-badge"><FileText size={16} /> Authorized workspace <span className="partner-mini">ASY × Hajja Zainab</span></div></div>
+          <div className="topbar-actions"><Link to="/notifications" className="notification-bell" title="Notifications"><Bell size={18}/>{unreadCount > 0 && <span>{unreadCount > 99 ? '99+' : unreadCount}</span>}</Link><div className="secure-badge"><FileText size={16} /> Authorized workspace <span className="partner-mini">ASY &amp; Hajja Zainab</span></div></div>
         </header>
         <section className="page-content"><Outlet /></section>
       </main>

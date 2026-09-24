@@ -44,12 +44,22 @@ export default function Payments() {
 
   async function recordPayment(e) {
     e.preventDefault(); setSaving(true); setError('');
+    const receiptWindow = window.open('about:blank', '_blank');
     try {
       const { data } = await api.post('/payments', { ...form, client_id:form.client_id });
       setForm(emptyForm); setApplications([]); setFinancials({ totalFee:0,totalPaid:0,balance:0 }); setShowForm(false); setSuccess(`Payment recorded. ${data.payment.receipt_number} is ready to print.`); await load();
       window.setTimeout(() => setSuccess(''), 4000);
-      window.open(`/payments/${data.payment.id}/print`, '_blank');
-    } catch (err) { setError(err.response?.data?.message || 'Could not record payment.'); }
+      const receiptUrl = `${window.location.origin}/payments/${data.payment.id}/print`;
+      if (receiptWindow) {
+        receiptWindow.location.href = receiptUrl;
+        receiptWindow.focus();
+      } else {
+        setSuccess(`Payment recorded. ${data.payment.receipt_number} is ready. Your browser blocked the new tab; use the Print link in Payment History.`);
+      }
+    } catch (err) {
+      if (receiptWindow && !receiptWindow.closed) receiptWindow.close();
+      setError(err.response?.data?.message || 'Could not record payment.');
+    }
     finally { setSaving(false); }
   }
 

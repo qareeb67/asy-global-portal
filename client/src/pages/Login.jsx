@@ -13,21 +13,11 @@ export default function Login({ onLogin }) {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     try {
-      const { data } = await api.post('/auth/login', {
-        email: email.trim(),
-        password
-      });
-
-      if (!data?.user || !data?.token) {
-        throw new Error('Login response was incomplete.');
-      }
-
-      sessionStorage.setItem('asy_access_token', data.token);
+      const { data } = await api.post('/auth/login', { email, password });
       onLogin(data.user);
     } catch (err) {
-      setError(err.response?.data?.message || err.message || 'Unable to sign in.');
+      setError(err.response?.data?.message || 'Unable to sign in.');
     } finally {
       setLoading(false);
     }
@@ -58,7 +48,7 @@ export default function Login({ onLogin }) {
           <span>TRAVEL • WORK • TOURS • MOBILITY</span>
           <h2>Every journey, organized beautifully.</h2>
           <p>Manage clients, applications, documents, payments and team activity from one secure workspace.</p>
-          <div className="partnership-note">A joint platform for <strong>ASY Global</strong> and <strong>Hajja Zainab Travel & Tours</strong>.</div>
+          <div className="partnership-note">A trusted joint platform for <strong>ASY &amp; Hajja Zainab Global Tours and Mobility</strong>.</div>
         </div>
       </div>
     </div>

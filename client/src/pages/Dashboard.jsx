@@ -29,33 +29,11 @@ const cards = [
 ];
 
 const travelPromos = [
-  {
-    tone: 'saudi',
-    country: 'Saudi Arabia',
-    flag: '🇸🇦',
-    title: 'Saudi travel & mobility desk',
-    text: 'Visa, work and guided travel support for clients preparing their next journey to the Kingdom.',
-    tag: 'SAUDI DESK',
-    Icon: Landmark,
-  },
-  {
-    tone: 'poland',
-    country: 'Poland',
-    flag: '🇵🇱',
-    title: 'Poland employment opportunities',
-    text: 'Organize warehouse, delivery and other employer opportunities with a clear client process.',
-    tag: 'POLAND DESK',
-    Icon: Building2,
-  },
-  {
-    tone: 'europe',
-    country: 'Europe',
-    flag: '🇪🇺',
-    title: 'European travel & work routes',
-    text: 'Keep European travel and employment applications organized from documents to departure.',
-    tag: 'EUROPE DESK',
-    Icon: Globe2,
-  },
+  { tone: 'saudi', country: 'Saudi Arabia', flag: '🇸🇦', title: 'Saudi work & travel desk', text: 'Keep Saudi visa, employment and guided-travel opportunities organized from first contact to departure.', tag: 'SAUDI', Icon: Landmark },
+  { tone: 'eu', country: 'European Union', flag: '🇪🇺', title: 'EU work, study & travel', text: 'Track European mobility options, employer opportunities and travel services in one clear workspace.', tag: 'EUROPEAN UNION', Icon: Globe2 },
+  { tone: 'poland', country: 'Poland', flag: '🇵🇱', title: 'Jobs & long-stay routes', text: 'Organize warehouse, delivery and other employer opportunities with a clear client process.', tag: 'POLAND', Icon: Building2 },
+  { tone: 'africa', country: 'Africa', flag: '🌍', title: 'Africa to the world', text: 'Keep Northern Nigerian and wider African client journeys connected to global opportunities.', tag: 'AFRICA', Icon: UsersRound },
+  { tone: 'schengen', country: 'Schengen Area', flag: '✈️', title: 'Multi-country travel routes', text: 'Manage tourism and mobility enquiries spanning the Schengen travel area from one desk.', tag: 'SCHENGEN', Icon: Plane },
 ];
 
 export default function Dashboard() {
@@ -79,7 +57,7 @@ export default function Dashboard() {
           <p>Manage clients, applications, documents and payments with a calm, professional travel workflow.</p>
           <div className="hero-actions">
             <Link to="/clients" className="primary-btn"><UserPlus size={17} /> Register client</Link>
-            <Link to="/clients" className="hero-ghost-btn"><Globe2 size={16} /> Open travel desk</Link><Link to="/payments" className="hero-ghost-btn"><WalletCards size={16} /> Finance desk</Link>
+            <Link to="/opportunities" className="hero-ghost-btn"><Globe2 size={16} /> Open travel desk</Link><Link to="/payments" className="hero-ghost-btn"><WalletCards size={16} /> Finance desk</Link>
           </div>
         </div>
         <div className="hero-art" aria-hidden="true">
@@ -115,12 +93,14 @@ export default function Dashboard() {
         ))}
       </div>
 
+      <section className="heritage-strip"><div><span className="heritage-pattern" aria-hidden="true"></span><div><span className="eyebrow">FROM AFRICA TO THE WORLD</span><strong>Global opportunity, guided with trust.</strong><p>Built for clients from Northern Nigeria and beyond.</p></div></div><span className="heritage-badge">TRAVEL • WORK • TOURS • MOBILITY</span></section>
+
       <section className="section-heading-row promo-heading">
         <div>
           <span className="eyebrow">TRAVEL DESK</span>
-          <h3>Destinations we help clients reach</h3>
+          <h3>Global destinations & opportunities</h3>
         </div>
-        <span className="muted">Internal promotion cards • update as opportunities change</span>
+        <span className="muted">Saudi • Europe • Africa • Schengen</span>
       </section>
 
       <div className="promo-grid">

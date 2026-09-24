@@ -46,7 +46,7 @@ export default function ReceiptPrint() {
         </div>
         {Number(payment.application_total_fee || 0) > 0 && <div className={`receipt-payment-status ${Number(payment.balance_after_payment) > 0 ? 'open' : 'paid'}`}><strong>{Number(payment.balance_after_payment) > 0 ? 'PARTIAL PAYMENT' : 'PAID IN FULL'}</strong><span>{Number(payment.balance_after_payment) > 0 ? `${money(payment.balance_after_payment)} remains outstanding on this application.` : 'This application has been fully paid based on the recorded service fee.'}</span></div>}
         {payment.notes && <div className="receipt-notes"><span>Notes</span><p>{payment.notes}</p></div>}
-        <div className="receipt-footer"><span>Thank you for choosing ASY Global Travel & Mobility.</span><span>Keep this receipt for your records.</span></div>
+        <div className="receipt-footer"><span>Thank you for choosing ASY & Hajja Zainab Global Tours and Mobility.</span><span>Keep this receipt for your records.</span></div>
         <button className="primary-btn no-print print-receipt-btn" onClick={() => window.print()}><PrinterIcon /> Print receipt</button>
       </div>
     </div>

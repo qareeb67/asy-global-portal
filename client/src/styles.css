@@ -180,3 +180,55 @@ a{color:inherit}
 
 .client-finance-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 16px;padding:10px;background:#f5faf9;border:1px solid #dceae7;border-radius:13px}.client-finance-strip div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px}.client-finance-strip span,.client-finance-strip strong{display:block}.client-finance-strip span{font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.client-finance-strip strong{font-size:12px;margin-top:4px}.due-text{color:#8a6726}.paid-text{color:#267144}.receipt-payment-status{display:flex;gap:10px;align-items:center;margin-top:18px;padding:11px 13px;border-radius:12px}.receipt-payment-status strong{font-size:9px;letter-spacing:.08em}.receipt-payment-status span{font-size:9px}.receipt-payment-status.open{background:#fff6e5;border:1px solid #ead8aa;color:#7b6128}.receipt-payment-status.paid{background:#edf8f0;border:1px solid #d0e8d7;color:#2e7148}.print-receipt-btn{display:inline-flex;align-items:center;gap:8px;margin-top:22px}.print-receipt-btn svg{width:16px;height:16px}.receipt-grid strong{word-break:break-word}
 @media (max-width:760px){.client-finance-strip{grid-template-columns:1fr}.receipt-payment-status{align-items:flex-start;flex-direction:column}}
+
+
+/* ASY & HAJJA ZAINAB brand refinement */
+:root{
+  --primary:#0d6f69;
+  --primary-dark:#084f4a;
+  --primary-soft:#e8f5f0;
+  --accent:#d6a64b;
+  --accent-soft:#fbf2df;
+  --navy:#0d2940;
+  --navy-2:#174e63;
+  --terracotta:#b8613e;
+  --sand:#efe0c2;
+  --ink:#182a35;
+}
+.portal-shell{background:linear-gradient(180deg,#fbfaf6 0%,#f4f5ef 100%)}
+.sidebar{background:
+  radial-gradient(circle at 82% 7%,rgba(35,145,126,.17),transparent 27%),
+  radial-gradient(circle at 8% 88%,rgba(214,166,75,.10),transparent 23%),
+  linear-gradient(180deg,#0a2134 0%,#0d3d47 54%,#082538 100%);}
+.sidebar:after{content:"";position:absolute;inset:auto 0 0 0;height:92px;opacity:.14;background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(214,166,75,.7) 10px 12px,transparent 12px 20px);pointer-events:none}
+.brand-mark{background:linear-gradient(145deg,#fffdf7 0%,#eaf6ee 100%);color:var(--primary);border-color:rgba(214,166,75,.24)}
+.brand-mark-ring{border-color:rgba(13,111,105,.25)}
+.brand-globe{width:23px;height:23px;stroke-width:1.65}
+.brand-shield{position:absolute;width:15px;height:15px;right:5px;top:5px;color:var(--accent);fill:rgba(214,166,75,.1);stroke-width:2.15}
+.brand-briefcase{position:absolute;width:10px;height:10px;right:9px;bottom:9px;color:var(--navy);stroke-width:2.5}
+.brand-plane{position:absolute;width:14px;height:14px;left:6px;top:7px;color:var(--primary);stroke-width:2.3;transform:rotate(-20deg)}
+.brand-mark-route{position:absolute;width:23px;height:11px;border-top:1.5px solid rgba(13,111,105,.55);border-radius:50%;transform:rotate(-18deg);z-index:0}
+.brand-mark-route.route-a{left:7px;top:15px}.brand-mark-route.route-b{left:12px;top:20px;transform:rotate(22deg);opacity:.7}
+.brand-globe{z-index:1}.brand-shield,.brand-plane,.brand-briefcase{z-index:2}.brand-monogram{z-index:3;color:var(--navy);font-size:6.5px}
+.brand-copy strong{font-size:14px}.brand-copy span{font-size:10px;letter-spacing:.045em;color:#d9c79f}.brand-copy small{color:#95b9b8}
+.topbar h1{font-size:15px;max-width:620px}.secure-badge{background:#f7f3e8;border-color:#eadfbd;color:#6b572d}
+.partnership-card{background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(214,166,75,.11));border-color:rgba(214,166,75,.16)}
+.partnership-card span{color:#a8c7c0}.partnership-icon{background:rgba(214,166,75,.17)}
+.hero-kicker{color:#d9c488}.travel-hero{background:radial-gradient(circle at 77% 25%,rgba(214,166,75,.18),transparent 24%),linear-gradient(118deg,#0a2438 0%,#0d4654 58%,#0d7770 100%)}
+.travel-hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:18px;opacity:.18;background:repeating-linear-gradient(135deg,#d6a64b 0 7px,transparent 7px 15px,#b8613e 15px 22px,transparent 22px 30px);pointer-events:none}
+.heritage-strip{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 18px;border:1px solid #e5d8bb;border-radius:17px;background:linear-gradient(110deg,#fffaf0 0%,#fff 58%,#eef7f1 100%);box-shadow:var(--shadow-soft);position:relative;overflow:hidden}
+.heritage-strip:after{content:"";position:absolute;right:-35px;top:-30px;width:170px;height:170px;border-radius:50%;border:18px solid rgba(214,166,75,.11);box-shadow:0 0 0 12px rgba(184,97,62,.06)}
+.heritage-strip>div{display:flex;align-items:center;gap:13px;position:relative;z-index:1}.heritage-pattern{width:52px;height:52px;border-radius:14px;display:block;flex:none;background:repeating-linear-gradient(45deg,#0d6f69 0 6px,#f2dfb2 6px 12px,#b8613e 12px 18px,#f7edd6 18px 24px);box-shadow:inset 0 0 0 6px rgba(255,255,255,.35)}
+.heritage-strip strong,.heritage-strip p{display:block}.heritage-strip strong{font-size:15px;color:var(--navy);margin-top:4px}.heritage-strip p{margin:4px 0 0;font-size:10px;color:var(--muted)}.heritage-badge{position:relative;z-index:1;background:#fff;border:1px solid #dfd7c4;color:#7b6031;border-radius:999px;padding:8px 11px;font-size:8px;font-weight:900;letter-spacing:.08em}
+.promo-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:13px}
+.travel-promo.saudi .promo-art{background:linear-gradient(145deg,#0b554f 0%,#0b8a78 52%,#d6a64b 100%)}
+.travel-promo.eu .promo-art{background:linear-gradient(145deg,#102e52 0%,#2c6f98 58%,#d5b35f 100%)}
+.travel-promo.poland .promo-art{background:linear-gradient(145deg,#16314f 0%,#4f6f87 58%,#c78e4e 100%)}
+.travel-promo.africa .promo-art{background:linear-gradient(145deg,#0e473f 0%,#8c643f 56%,#e0a64e 100%)}
+.travel-promo.schengen .promo-art{background:linear-gradient(145deg,#173960 0%,#3478a0 56%,#b7d4d3 100%)}
+.travel-promo .promo-art{height:142px}.travel-promo.africa .promo-stars{opacity:.18}.travel-promo.eu .promo-moon,.travel-promo.schengen .promo-moon{width:82px;height:82px;background:rgba(255,255,255,.16);box-shadow:none}.travel-promo.africa .promo-country-icon{color:#f4d18a}.travel-promo.eu .promo-country-icon,.travel-promo.schengen .promo-country-icon{color:#fff}.travel-promo .promo-body h4{font-size:16px}.travel-promo .promo-body p{min-height:67px}
+.account-settings-link{font-weight:850}.sidebar nav a.active{box-shadow:inset 3px 0 0 var(--accent),0 8px 20px rgba(0,0,0,.08)}
+.receipt-page-title{font-weight:900}
+@media (max-width:1250px){.promo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){.promo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.heritage-strip{align-items:flex-start;flex-direction:column}.heritage-badge{align-self:flex-start}}
+@media (max-width:760px){.promo-grid{grid-template-columns:1fr}.brand-copy strong{font-size:12px}.brand-copy span{font-size:9px}.heritage-strip>div{align-items:flex-start}.heritage-badge{white-space:normal}}

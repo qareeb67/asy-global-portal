@@ -49,7 +49,7 @@ export default function Profile({ user, onUserUpdated }) {
   return (
     <div>
       <div className="page-heading">
-        <div><span className="eyebrow">MY ACCOUNT</span><h2>User profile</h2><p>Manage your staff identity and password for the ASY Portal.</p></div>
+        <div><span className="eyebrow">ACCOUNT SETTINGS</span><h2>Account settings</h2><p>Manage your staff identity, sign-in details and password for ASY &amp; Hajja Zainab Global Tours and Mobility.</p></div>
         <div className="profile-role-card"><ShieldCheck size={16} /><span>{profile.role.replace('_', ' ')}</span></div>
       </div>
       {error && <div className="error-box">{error}</div>}
@@ -66,7 +66,7 @@ export default function Profile({ user, onUserUpdated }) {
         </section>
 
         <section className="panel">
-          <div className="panel-title"><div><span className="eyebrow">PROFILE DETAILS</span><h3>Account information</h3></div><UserRound size={18} /></div>
+          <div className="panel-title"><div><span className="eyebrow">PROFILE DETAILS</span><h3>Account information &amp; security</h3></div><UserRound size={18} /></div>
           <form className="form-stack" onSubmit={save}>
             <label>Full name<input required value={form.full_name} onChange={e => setForm({ ...form, full_name: e.target.value })} /></label>
             <label>Email address<input type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} /></label>
